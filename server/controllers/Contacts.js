@@ -27,6 +27,21 @@ class ContactController {
       singleContact: oneContact
     });
   }
+
+  static async getAllContact(_, res) {
+    const contacts = Contact.findAll({});
+    if (await contacts.length > 0) {
+      return res.status(200).json({
+        message: 'All contacts gotten successfully',
+        status: true,
+        allContacts: contacts
+      });
+    }
+    res.status(404).json({
+      message: 'Contact not found',
+      status: false
+    });
+  }
 }
 
 export default ContactController;
