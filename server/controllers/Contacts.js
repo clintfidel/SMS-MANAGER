@@ -13,6 +13,20 @@ class ContactController {
       contact: await createdContact
     });
   }
+
+  static async getOneContact(req, res) {
+    const { id } = req.params;
+    const oneContact = Contact.findOne({
+      where: {
+        id
+      }
+    });
+    return res.status(200).json({
+      message: 'Single contact retrieved successfully',
+      status: true,
+      singleContact: oneContact
+    });
+  }
 }
 
 export default ContactController;
