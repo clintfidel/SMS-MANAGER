@@ -42,6 +42,28 @@ class ContactController {
       status: false
     });
   }
+
+  static async updateContactList(req, res) {
+    const { id } = req.params;
+    const { name, phoneNumber } = req.body;
+    const foundContact = Contact.findOne({
+      where: {
+        id
+      }
+    });
+    if (await foundContact) {
+      const updateContact = Contact.update(name, phoneNumber);
+      res.status(200).json({
+        message: 'Contact updated succesfully',
+        status: true,
+        updatedContact: updateContact
+      });
+    }
+    res.status(404).json({
+      message: 'Contact not found',
+      status: false
+    });
+  }
 }
 
 export default ContactController;
