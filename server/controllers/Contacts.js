@@ -43,7 +43,7 @@ class ContactController {
     });
   }
 
-  static async updateContactList(req, res) {
+  static async updateOneList(req, res) {
     const { id } = req.params;
     const { name, phoneNumber } = req.body;
     const foundContact = Contact.findOne({
@@ -57,6 +57,27 @@ class ContactController {
         message: 'Contact updated succesfully',
         status: true,
         updatedContact: updateContact
+      });
+    }
+    res.status(404).json({
+      message: 'Contact not found',
+      status: false
+    });
+  }
+
+  static async deleteOneList(req, res) {
+    const { id } = req.params;
+    const foundContact = Contact.findOne({
+      where: {
+        id
+      }
+    });
+    if (await foundContact) {
+      const deleteContact = Contact.destroy(id);
+      res.status(200).json({
+        message: 'Contact deleted succesfully',
+        status: true,
+        deletedContact: deleteContact
       });
     }
     res.status(404).json({
