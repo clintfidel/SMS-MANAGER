@@ -6,8 +6,8 @@ const { Contact } = database;
 class ContactController {
   static async createContact(req, res) {
     try {
-      const { id, name, phoneNumber } = req.body;
-      const createdContact = Contact.create({ id, name, phoneNumber });
+      const { name, phoneNumber } = req.body;
+      const createdContact = Contact.create({ name, phoneNumber });
       return res.status(201).json({
         message: 'contact created successfully',
         status: true,
@@ -55,7 +55,7 @@ class ContactController {
     }
   }
 
-  static updateOneList(req, res) {
+  static updateOneContact(req, res) {
     const { contactId } = req.params;
     const { name, phoneNumber } = req.body;
     Contact.findOne({
@@ -85,7 +85,7 @@ class ContactController {
       });
   }
 
-  static deleteOneList(req, res) {
+  static deleteOneContact(req, res) {
     const { contactId } = req.params;
     Contact.findOne({
       where: {

@@ -9,14 +9,8 @@ module.exports = (sequelize, DataTypes) => {
     phoneNumber: {
       type: DataTypes.STRING,
       allowNull: false
-    }
+    },
+
   }, {});
-  Contact.associate = (models) => {
-    Contact.hasMany(models.Sms, {
-      foreignKey: 'contactId',
-      onDelete: 'CASCADE',
-      hooks: true,
-    });
-  };
   return Contact;
 };

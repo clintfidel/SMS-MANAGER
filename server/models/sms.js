@@ -18,13 +18,5 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING,
     },
   }, {});
-  Sms.associate = (models) => {
-    Sms.belongsTo(models.Contact, {
-      foreignKey: 'smsId',
-      onDelete: 'CASCADE',
-      hooks: true,
-    });
-    // associations can be defined here
-  };
   return Sms;
 };
