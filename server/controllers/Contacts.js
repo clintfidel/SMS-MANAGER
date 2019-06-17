@@ -7,11 +7,11 @@ class ContactController {
   static async createContact(req, res) {
     try {
       const { name, phoneNumber } = req.body;
-      const createdContact = Contact.create({ name, phoneNumber });
+      const createdContact = await Contact.create({ name, phoneNumber });
       return res.status(201).json({
         message: 'contact created successfully',
         status: true,
-        contact: await createdContact
+        contact: createdContact
       });
     } catch (error) {
       return error;
@@ -21,7 +21,7 @@ class ContactController {
   static async getOneContact(req, res) {
     try {
       const { contactId } = req.params;
-      const oneContact = Contact.findOne({
+      const oneContact = await Contact.findOne({
         where: {
           id: contactId
         }
@@ -29,7 +29,7 @@ class ContactController {
       return res.status(200).json({
         message: 'Single contact retrieved successfully',
         status: true,
-        singleContact: await oneContact
+        singleContact: oneContact
       });
     } catch (error) {
       return error;
@@ -38,12 +38,12 @@ class ContactController {
 
   static async getAllContact(_, res) {
     try {
-      const contacts = Contact.findAll({});
+      const contacts = await Contact.findAll({});
       if (contacts) {
         return res.status(200).json({
           message: 'All contacts gotten successfully',
           status: true,
-          allContacts: await contacts
+          allContacts: contacts
         });
       }
       res.status(404).json({
