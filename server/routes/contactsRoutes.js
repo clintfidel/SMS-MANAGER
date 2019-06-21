@@ -5,8 +5,8 @@ const {
   getAllContact,
   getOneContact,
   createContact,
-  updateOneList,
-  deleteOneList
+  updateOneContact,
+  deleteOneContact
 } = contactsController;
 const apiPrefix = '/contacts';
 
@@ -14,9 +14,9 @@ const contactsRouter = express.Router();
 contactsRouter
   .route(`${apiPrefix}/create`).post(createContact);
 contactsRouter
-  .route(`${apiPrefix}/update/:contactId`).put(updateOneList);
+  .route(`${apiPrefix}/update/:contactId`).put(updateOneContact);
 contactsRouter
-  .route(`${apiPrefix}/delete/:contactId`).delete(deleteOneList);
+  .route(`${apiPrefix}/delete/:contactId`).delete(deleteOneContact);
 contactsRouter
   .route(`${apiPrefix}/allcontacts`).get(getAllContact);
 contactsRouter
